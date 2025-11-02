@@ -9,16 +9,16 @@ It executes .py files with many features such as variable and constant declarati
    ➡️ test - contains sample code for some algorithms
    
 ## ✨ Features in v0.1.0
-  ✅ Indentation-based syntax (Python-Like)
-  ✅ Variable and Constant declarations 
-  ✅ Conditional statements (if,elif,else)
-  ✅ While loops
-  ✅ Built in functions - print(),input(),int()
-  ✅ Arithmetic Operations (+,-,*,/,^)
-  ✅ Logical Operations (and,or,not)
-  ✅ Comparators ( > , < , == , >= , <= , !=)
-  ✅ Supports Data Types - String,Integer,Float,Boolean,None
-  ✅ Basic Memory Tracking and Handling (under hood)
+  ✅ Indentation-based syntax (Python-Like)  
+  ✅ Variable and Constant declarations   
+  ✅ Conditional statements (if,elif,else)  
+  ✅ While loops  
+  ✅ Built in functions - print(),input(),int()  
+  ✅ Arithmetic Operations (+,-,*,/,^)  
+  ✅ Logical Operations (and,or,not)  
+  ✅ Comparators ( > , < , == , >= , <= , !=)  
+  ✅ Supports Data Types - String,Integer,Float,Boolean,None  
+  ✅ Basic Memory Tracking and Handling (under hood)  
 
 # 🧠 Plans for Future Versions
   ➡️ Expand standard library
