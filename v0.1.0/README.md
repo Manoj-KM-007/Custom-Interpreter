@@ -8,7 +8,7 @@ It executes .py files with many features such as variable and constant declarati
    ➡️ bin/interpret.exe - main file,download and use in your project directory
    ➡️ test - contains sample code for some algorithms
    
-# ✨ Features in v0.1.0
+## ✨ Features in v0.1.0
   ✅ Indentation-based syntax (Python-Like)
   ✅ Variable and Constant declarations 
   ✅ Conditional statements (if,elif,else)
