@@ -1,5 +1,5 @@
-# MiniPython 
-It is simple Python interpreter written from scratch in C. It is the first version of the project and has only limited features including ones which python does'nt have.
+# Custom Programming Language 
+It is simple Python-like interpreter written from scratch in C. It is the first version of the project and has only limited features including ones which python does'nt have.
 # Features
 1) Interprets .py files and runs them
 2) Supports Integers,Strings,Booleans,Floats
