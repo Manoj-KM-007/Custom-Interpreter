@@ -1,6 +1,6 @@
 # ⚙️ Interpreter V0.1.0
 
-A lightweight Pythonic Interpreter written entirely in C.
+A lightweight Pythonic Interpreter written entirely in C.  
 It executes .py files with many features such as variable and constant declarations,loops,condition statments,logics,comments and basic I/O.
 
  # 🗂️ Project Structure
@@ -21,10 +21,10 @@ It executes .py files with many features such as variable and constant declarati
   ✅ Basic Memory Tracking and Handling (under hood)  
 
 # 🧠 Plans for Future Versions
-  ➡️ Expand standard library
-  ➡️ Provide Data Structures such as Lists,Dictionary
-  ➡️ Provide Functions
-  ➡️ Provide optional static typing
+  ➡️ Expand standard library  
+  ➡️ Provide Data Structures such as Lists,Dictionary  
+  ➡️ Provide Functions  
+  ➡️ Provide optional static typing  
   
 # ▶️ Run Instructions for Test Programs
   ```bash
