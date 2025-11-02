@@ -29,5 +29,6 @@
 ```
   # 🕓 Version History 
     v0.1.0 (second release) 
-  # 🧑‍💻 Author Manoj K M
+  # 🧑‍💻 Author 
+    Manoj K M
     Built with C and Curiosity 💻
