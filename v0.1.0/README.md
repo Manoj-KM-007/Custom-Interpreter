@@ -10,7 +10,7 @@
   ✅ Indentation-based syntax (Python-Like)  
   ✅ Variable and Constant declarations  
   ✅ Conditional statements (if,elif,else)   
-  ✅ While loops 
+  ✅ While loops    
   ✅ Built in functions - print(),input(),int()     
   ✅ Arithmetic Operations (+,-,*,/,^)  
   ✅ Logical Operations (and,or,not)   
