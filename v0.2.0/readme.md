@@ -41,11 +41,14 @@ To interpret and run a file in current directory,  run:
   fn add(a,b):
     return a+b
   ```
+  
   use the 'fn' keyword to create a function
+  
 * Function Call
   ```
   const ans = add(1,2) # use function name followed by arguments
-  ``
+  ```
+  
 * str() and bool() type conversion
   ```
   const a = str(0) # '0'
@@ -62,6 +65,6 @@ To interpret and run a file in current directory,  run:
 * Write a Garbage Collector
 
 # Author
--- Manoj K M
+-- Manoj K M  
 -- Written With C and Curiosity
 
