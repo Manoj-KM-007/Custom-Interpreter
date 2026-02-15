@@ -403,6 +403,7 @@ Value evaluate(astNode* node){
         Variable* v = createVariable(varName,val.type,valObj);
         v->isConstant = node->isConstant;
         setVariable(v);
+        
         return makeNone();
     }else if(node->type == AST_INT){
         Value val = evaluate(node->child);
@@ -516,7 +517,7 @@ Value evaluate(astNode* node){
                 fgets(toReturn.data.stringData,1024,stdin);
                 size_t len = strlen(toReturn.data.stringData);
                 char** toReturnStr = &toReturn.data.stringData;
-                if(len > 0 && *toReturnStr[len - 1] == '\n'){
+                if(len > 0 && (*toReturnStr)[len - 1] == '\n'){
                     (*toReturnStr)[len - 1] = '\0';
                 }
                 break;
@@ -599,8 +600,10 @@ Value evaluate(astNode* node){
         f->params = head;
         f->thenBlock = node->thenBlock;
         setFunction(f);
+        return makeNone();
     }
     else if(node->type == AST_FUNCTION_CALL){
+        inFunction = true;
         Function* f = getFunction(node->data.stringData);
         Param* function_params = f->params;
         astNode* value_params = node->param;
@@ -633,6 +636,7 @@ Value evaluate(astNode* node){
             }    
             isReturning = false;
             clear_local();
+            inFunction = false;
             return result;    
         }
     }

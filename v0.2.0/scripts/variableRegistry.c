@@ -46,53 +46,27 @@ unsigned int hash(char* varName){
 }
 
 void setVariable(Variable* v){
-    Variable** current;
     unsigned int index = hash(v->varName);
-    if(!local_var[index]){
-        local_var[index] = v;
-        return;
-    }
-    current = &local_var[index];
-    while(*current){ 
-        char* varName = (*current)->varName;
-        if(strcmp(varName,v->varName) == 0){
-            if((*current)->isConstant){
+    Variable** table = inFunction ? local_var : arr;
+    Variable** head = &table[index];
+    Variable* current = *head;
+    while(current){
+        if(strcmp((current)->varName,v->varName) == 0){
+            if((current)->isConstant){
                 char err[256];
-                snprintf(err,sizeof(err),"'%s' cannot be Modified (const)",varName);
+                snprintf(err,sizeof(err),"'%s' cannot be Modified (const)",current->varName);
                 error(err,0,RUN_TIME_ERROR);
             }
-            v->next = (*current)->next;
-            *current = v;
+            v->next = current->next;
+            current->data = v->data;
+            current->isConstant = v->isConstant;
+            current->type = v->type;
             return;
         }
-        current = &((*current)->next);
+        current = current->next;
     }
-    (*current)->data= v->data;
-    (*current)->isConstant = v->isConstant;
-    (*current)->type = v->type;
-    return;
-    if(!arr[index]){
-        arr[index] = v;
-        return;
-    }
-    current = &arr[index];
-    while(*current){ 
-        char* varName = (*current)->varName;
-        if(strcmp(varName,v->varName) == 0){
-            if((*current)->isConstant){
-                char err[256];
-                snprintf(err,sizeof(err),"'%s' cannot be Modified (const)",varName);
-                error(err,0,RUN_TIME_ERROR);
-            }
-            v->next = (*current)->next;
-            *current = v;
-            return;
-         }
-        current = &((*current)->next);
-    }
-    (*current)->data= v->data;
-    (*current)->isConstant = v->isConstant;
-    (*current)->type = v->type;
+    v->next = *head;
+    *head = v;
 }
 
 Variable* getVariable(char* varName){
