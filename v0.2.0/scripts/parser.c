@@ -5,6 +5,9 @@
 #include <string.h>
 #include <evaluate.h>
 
+void skipNewline(){
+    while(current && current->type == NEWLINE) consume();
+}
 astNode* createAstNode(){
     MemNode* node = createMemNode(sizeof(astNode));
     astNode* temp = node->ptr;
@@ -220,7 +223,7 @@ astNode* parseIO(){
             error("Missing ')' for Built-in print() function",current->lineCount,SYNTAX_ERROR);
         }
         consume();
-        if(current && current->type == NEWLINE) consume();
+        skipNewline();
         if(printNode->child == NULL){
             error("print() requires parameters,0 parameters given",current->lineCount,SYNTAX_ERROR);
         }
@@ -240,7 +243,7 @@ astNode* parseIO(){
             error("Missing ')' for Built-in input() function",current->lineCount,SYNTAX_ERROR);
         }
         consume();
-        if(current && current->type == NEWLINE) consume();
+        skipNewline();
         return inputNode;
     }else{
         return NULL;
@@ -257,9 +260,7 @@ astNode* parseTypeFunction(){
             node->child = child;
             if(current && current->type == R_BRACK){
                 consume();
-                if(current && current->type == NEWLINE){
-                    consume();
-                }
+                skipNewline();
                 return node;
             }else{
                 error("Missing ')' in int() built-in function",current->lineCount,SYNTAX_ERROR);
@@ -299,9 +300,7 @@ astNode* parseTypeFunction(){
             node->child = child;
             if(current && current->type == R_BRACK){
                 consume();
-                if(current && current->type == NEWLINE){
-                    consume();
-                }
+                skipNewline();
             return node;
             }else{
                 error("Missing ')' in bool() built-in function",current->lineCount,SYNTAX_ERROR);
@@ -338,7 +337,7 @@ astNode* parseVarDec(){
         astNode* value = parseExpression();
         node->right = value;
         node->isConstant = isConstant;
-        if(current->type == NEWLINE) consume();
+        skipNewline();
         return node;
     }else{
         return NULL;
@@ -356,7 +355,7 @@ astNode* parseLoop(){
             error("Missing ':' in while loop declaration",current->lineCount,SYNTAX_ERROR);
         }
         consume();
-        if(current && current->type == NEWLINE) consume();
+        skipNewline();
         if(current && current->type != INDENT){
             error("Missing Indentation in While Loop",current->lineCount,SYNTAX_ERROR);
         }
@@ -365,6 +364,7 @@ astNode* parseLoop(){
         astNode* tail = NULL;
         while(current && current->type != DEDENT){
             astNode* statement = parseBlock();
+            if(statement == NULL) break;
             if(head == NULL){
                 head = statement;
                 tail = statement;
@@ -372,7 +372,7 @@ astNode* parseLoop(){
                 tail->thenNext = statement;
                 tail = statement;
             }
-            if(current->type == NEWLINE) consume();
+            skipNewline();
         }
         if(current && current->type != DEDENT){
             error("Indentation Does Not End Properly",current->lineCount,INDENTATION_ERROR);
@@ -396,7 +396,7 @@ astNode* parseIf(){
             error("Missing ':' in if statement",current->lineCount,SYNTAX_ERROR);
         }
         consume();
-        if(current && current->type == NEWLINE) consume();
+        skipNewline();
         if(current && current->type != INDENT){
             error("Indentation Does Not Start Correctly",current->lineCount,INDENTATION_ERROR);
         }
@@ -415,14 +415,14 @@ astNode* parseIf(){
                 tail->thenNext = statement;
                 tail = statement;
             }
-            if(current && current->type == NEWLINE) consume();
+           skipNewline();
         }
         ifNode->thenBlock = head;
         if(current && current->type !=DEDENT){
             error("Indentation Does not End Properly",current->lineCount,INDENTATION_ERROR);
         }
         if(current && current->type == DEDENT) consume();
-        if(current && current->type == NEWLINE) consume();
+        skipNewline();
         if(current && current->type == ELIF){
             ifNode->nextBlock  = parseIf();
         }
@@ -432,7 +432,7 @@ astNode* parseIf(){
                 error("Missing ':' in else statement",current->lineCount,SYNTAX_ERROR);
             }
             consume();
-            if(current && current->type == NEWLINE) consume();
+            skipNewline();
             if(current && current->type != INDENT){
                 error("Indentation Does not Start Properly",current->lineCount,INDENTATION_ERROR);
             }
@@ -443,7 +443,8 @@ astNode* parseIf(){
             astNode* tail = NULL;
             while(current && current->type != DEDENT){
                 astNode* statement = parseBlock();
-                if(current->type == NEWLINE) consume();
+                 if(statement == NULL) break;
+                skipNewline();
                 if(head == NULL){
                     head = statement;
                     tail = statement;
@@ -493,9 +494,7 @@ astNode* parseReturn(){
         consume();
         astNode* expr = parseExpression();
         returnNode->child = expr;
-        if(current && current->type == NEWLINE){
-            consume();
-        }
+        skipNewline();
         return returnNode;
     }else{
         return NULL;
@@ -520,19 +519,15 @@ astNode* parseFunction(){
                     consume();
                     if(current && current->type == COLON){
                         consume();
-                        if(current && current->type == NEWLINE) consume();
+                        skipNewline();
                         if(current && current->type == INDENT){
                             consume();
                             astNode* head = NULL;
                             astNode* tail = NULL;
                             while(current &&  current->type != DEDENT){
-                                astNode* stmt;
-                                if(current && current->type == RETURN){
-                                    stmt = parseReturn();
-                                }else{
-                                    stmt = parseBlock();
-                                }
-                                if(current && current->type == NEWLINE) consume();
+                                astNode* stmt = parseBlock();
+                                 if(stmt == NULL) break;
+                               skipNewline();
                                 if(head == NULL){
                                     head = stmt;
                                     tail = stmt;
@@ -540,7 +535,7 @@ astNode* parseFunction(){
                                     tail->thenNext = stmt;
                                     tail = stmt;
                                 }
-                                if(current && current->type == NEWLINE) consume();
+                               skipNewline();
                             }
                             node->thenBlock = head;
                             if(current->type == DEDENT) consume();
@@ -577,7 +572,7 @@ astNode* parseCallFunction(){
             astNode* head = NULL;
             astNode* tail = NULL;
             while(current && current->type != R_BRACK){
-                astNode* param = parseAtom();
+                astNode* param = parseExpression();
                 if(head == NULL){
                     head = param;
                     tail = param;
@@ -603,9 +598,7 @@ astNode* parseCallFunction(){
 }
 
 astNode* parseBlock(){
-    while(current && (current->type == NEWLINE || current->type == INDENT)){
-        consume();
-    }
+    skipNewline();
     LexerNode* node = current;
     if(node == NULL){
         error("Undefined Error While Parsing",current->lineCount,RUN_TIME_ERROR);
@@ -616,16 +609,22 @@ astNode* parseBlock(){
     else if(node->type == IDENTIFIER && node->next->type == L_BRACK) return parseCallFunction();
     else if(node->type == IDENTIFIER || node->type == CONST) return parseVarDec();
     else if(node->type == FUNCTION) return parseFunction();
+    else if(node->type == RETURN) return parseReturn();
     else{ 
-        error("Undefined Statement Found While Parsing",-current->lineCount,RUN_TIME_ERROR);
+        error("Undefined Statement Found While Parsing",current->lineCount,RUN_TIME_ERROR);
         return NULL;
     }
 }
 
 void Parser(){
-    while(current && current != NULL){
+    while(current){
+         skipNewline();
         astNode* node = parseBlock();
         if(node == NULL){
+            if(current && current->type == DEDENT){
+                consume();
+                continue;
+            }
             error("Unexpected Error While Parsing",current->lineCount,RUN_TIME_ERROR);
         }
         if(ast_root == NULL){
@@ -635,8 +634,6 @@ void Parser(){
             ast_tail->astChain = node;
             ast_tail = node;
         }
-        if(current && current->type == NEWLINE){
-            consume();
-        }
+        skipNewline();
     }
 }

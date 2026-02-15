@@ -13,6 +13,7 @@ astNode* ast_root = NULL;
 astNode* ast_tail = NULL;
 bool isReturning = false;
 Value functionReturn;
+
 Value makeNone(){
     Value v;
     v.type = D_NONE;
@@ -600,7 +601,6 @@ Value evaluate(astNode* node){
         setFunction(f);
     }
     else if(node->type == AST_FUNCTION_CALL){
-        inFunction = true;
         Function* f = getFunction(node->data.stringData);
         Param* function_params = f->params;
         astNode* value_params = node->param;
@@ -640,8 +640,6 @@ Value evaluate(astNode* node){
         Value v = evaluate(node->child);
         functionReturn = v;
         isReturning = true;
-        clear_local();
-        inFunction = false;
         return functionReturn;
     }
     return makeNone();

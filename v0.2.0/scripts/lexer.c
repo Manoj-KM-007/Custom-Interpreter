@@ -7,15 +7,7 @@
 LexerNode* lexer_output = NULL;
 LexerNode* lexer_tail = NULL;
 Stack* stk = NULL;
-bool shouldSkipLine(char* line){
-    int n = strlen(line);
-    int i =0;
-    while(isspace(line[i]) && i < n) i++;
-    if(line[i] == '\n' || line[i] == '#'){
-        return true;
-    }
-    return false;
-}
+
 void Lexer(char* fileName){
     char line[256];
     FILE* fptr = fopen(fileName,"r");
@@ -28,7 +20,6 @@ void Lexer(char* fileName){
     stk = createStack();
     pushStack(stk,0);
     while(fgets(line,sizeof(line),fptr)){
-        if(shouldSkipLine(line)) continue;
         line_lexer(line,lineCount,stk);
         lineCount++;
     }
@@ -58,6 +49,17 @@ void line_lexer(char* line,int lineCount,Stack* stk){
     bool commentFound = false;
     int current_space = 0;
     int prev_indent = peekStack(stk);
+    while(i < n && isspace(line[i])) i++;
+    if(line[i] == '\n' || line[i] == '\0' || line[i] == '#'){
+        MemNode* node = createMemNode(sizeof(LexerNode));
+        LexerNode* newLineNode = node->ptr;
+        newLineNode->type = NEWLINE;
+        newLineNode->lineCount = lineCount;
+        newLineNode->next = NULL;
+        pushIntoLexerOutput(newLineNode);
+        return;
+    }
+    i= 0;
     while(line[i] == ' ' || line[i] == '\t') {
         current_space++;
         i++;
@@ -68,6 +70,7 @@ void line_lexer(char* line,int lineCount,Stack* stk){
         LexerNode* temp = node->ptr;
         temp->next = NULL;
         temp->type = INDENT;
+        temp->lineCount = lineCount;
         pushIntoLexerOutput(temp);
     }else if(stk->top != NULL && prev_indent > current_space){
         while(stk->top != NULL && peekStack(stk) > current_space){
@@ -75,6 +78,7 @@ void line_lexer(char* line,int lineCount,Stack* stk){
             MemNode* node = createMemNode(sizeof(LexerNode));
             LexerNode* temp = node->ptr;
             temp->next = NULL;
+            temp->lineCount = lineCount;
             temp->type = DEDENT;
             pushIntoLexerOutput(temp);
         }
@@ -285,6 +289,7 @@ void line_lexer(char* line,int lineCount,Stack* stk){
         LexerNode* tempNewlineNode = newlineNode->ptr;
         tempNewlineNode->next = NULL;
         tempNewlineNode->type = NEWLINE;
+        tempNewlineNode->lineCount = lineCount;
         pushIntoLexerOutput(tempNewlineNode);
     }
 }
