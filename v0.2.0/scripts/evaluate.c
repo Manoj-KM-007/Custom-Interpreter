@@ -551,6 +551,9 @@ Value evaluate(astNode* node){
             astNode* stmt = node->thenBlock;
             while(stmt){
                 evaluate(stmt);
+                if(isReturning){
+                    return makeNone();
+                }
                 stmt = stmt->thenNext;
             }
             condition = evaluate(node->child);
@@ -562,6 +565,9 @@ Value evaluate(astNode* node){
             astNode* current = node->thenBlock;
             while(current != NULL){
                 evaluate(current);
+                if(isReturning){
+                    return makeNone();
+                }
                 current = current->thenNext;
             }
         }else{
@@ -571,6 +577,9 @@ Value evaluate(astNode* node){
                 astNode* current = node->elseBlock->thenBlock;
                 while(current != NULL){
                     evaluate(current);
+                    if(isReturning){
+                        return makeNone();
+                    }
                     current = current->thenNext;
                 }
             }
