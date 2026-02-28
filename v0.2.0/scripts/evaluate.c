@@ -12,6 +12,7 @@
 astNode* ast_root = NULL;
 astNode* ast_tail = NULL;
 bool isReturning = false;
+char* curFunction = NULL;
 Value functionReturn;
 
 Value makeNone(){
@@ -402,8 +403,8 @@ Value evaluate(astNode* node){
         *((Value*) valObj->ptr) = val;
         Variable* v = createVariable(varName,val.type,valObj);
         v->isConstant = node->isConstant;
+        v->funcName = curFunction;
         setVariable(v);
-        
         return makeNone();
     }else if(node->type == AST_INT){
         Value val = evaluate(node->child);
@@ -613,6 +614,7 @@ Value evaluate(astNode* node){
     }
     else if(node->type == AST_FUNCTION_CALL){
         inFunction = true;
+        curFunction = node->data.stringData;
         Function* f = getFunction(node->data.stringData);
         Param* function_params = f->params;
         astNode* value_params = node->param;
@@ -644,8 +646,9 @@ Value evaluate(astNode* node){
                 stmt = stmt->thenNext;
             }    
             isReturning = false;
-            clear_local();
+            clear_local(node->data.stringData);
             inFunction = false;
+            curFunction= NULL;
             return result;    
         }
     }

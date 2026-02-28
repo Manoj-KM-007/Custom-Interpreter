@@ -8,9 +8,19 @@ Variable* arr[100];
 Variable* local_var[100];
 bool inFunction = false;
 
-void clear_local(){
-    for(int i = 0; i < 100; i++){
-        local_var[i] = NULL;
+void clear_local(char* funcName){
+    Variable** cur;
+    Variable* node;
+    for(int i =0;i < 100;i++){
+        cur = &local_var[i];
+        while(*cur != NULL){
+            node = *cur;
+            if((node->funcName) && strcmp(node->funcName,funcName) == 0){
+                *cur = node->next;
+            }else{
+                cur = &node->next;
+            }
+        }
     }
 }
 void initVariableRegistry() {
@@ -30,6 +40,7 @@ Variable* createVariable(char* varName,DataType type,MemNode* obj){
     strcpy(v->varName,varName);
     v->data =  obj->ptr;
     v->isConstant = false;
+    v->funcName = NULL;
     v->type = type;
     v->next = NULL;
     return v;
