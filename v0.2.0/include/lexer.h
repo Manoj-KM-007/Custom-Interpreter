@@ -59,10 +59,8 @@ typedef struct LexerNode
 LexerNode* lexer_output;
 LexerNode* lexer_tail;
 Stack* stk;
-bool shouldSkipLine(char* line);
 void Lexer(char* fileName);
 void pushIntoLexerOutput(LexerNode* node);
 void line_lexer(char* line,int lineCount,Stack* stk);
-void printLexerList(LexerNode* head);
 
 #endif
