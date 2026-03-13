@@ -136,15 +136,15 @@ c = sum(0,10) # 10
    which the error happens ,hints and Even Error types. The following are the error types in the interpreter.
 Error Type | Why ? | What to do ? |
 |----------|-------|--------------|
-SYNTAX_ERROR | Incorrect Syntax Usage | Refer Docs|
-DIVISION_BY_ZERO_ERROR | Division by zero | add checks / remove manual /0|
-COMPILE_TIME_ERROR | Possibly Memory Allocation Error | Rebuild the interpreter or Dm me the program|
-FILE_NOT_FOUND_ERROR | Occurs when you pass a filename that does not exist for interpretation | check filename or rename existing file|
-FILE_ARG_ERROR | Occurs when you pass multiple arguments in the terminal instead of just filename or --version | remove unnecessary arguments|
-FILE_EXTENSION_ERROR | Occurs when you pass a filename that is not of '.app' extension | change file extension to '.app'|
-INDENTATION_ERROR | Occurs when there are wrong or unnecessary indentations in blocks or main program | check indentations,specially inside blocks. Make sure all main program statments are not indented|
-RUN_TIME_ERROR | Occurs when there is a runtime error , like passing a string to int() etc | check program logic,add checks by using the line number given by the interpreter|
-FUNCTION_ERROR | Occurs when there are function related errors like reusing function names,Empty functions or when wrong parameters are passes | Use the line number to identify the exact error and debug|
+| SYNTAX_ERROR | Incorrect Syntax Usage | Refer Docs|
+| DIVISION_BY_ZERO_ERROR | Division by zero | add checks / remove manual /0|
+| COMPILE_TIME_ERROR | Possibly Memory Allocation Error | Rebuild the interpreter or Dm me the program|
+| FILE_NOT_FOUND_ERROR | Occurs when you pass a filename that does not exist for interpretation | check filename or rename existing file|
+| FILE_ARG_ERROR | Occurs when you pass multiple arguments in the terminal instead of just filename or --version | remove unnecessary arguments|
+| FILE_EXTENSION_ERROR | Occurs when you pass a filename that is not of '.app' extension | change file extension to '.app'|
+| INDENTATION_ERROR | Occurs when there are wrong or unnecessary indentations in blocks or main program | check indentations,specially inside blocks. Make sure all main program statments are not indented|
+| RUN_TIME_ERROR | Occurs when there is a runtime error , like passing a string to int() etc | check program logic,add checks by using the line number given by the interpreter|
+| FUNCTION_ERROR | Occurs when there are function related errors like reusing function names,Empty functions or when wrong parameters are passes | Use the line number to identify the exact error and debug|
 
 # Author
 Manoj K M
