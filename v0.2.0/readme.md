@@ -1,70 +1,52 @@
-# Custom Interpreter V0.2.0
-This Repo provides the code to implement an interpreter written from scratch in c. (No name yet).  
-This version is the superset of v0.1.0 with better and more features.
+# What ?
+This repository holds the codebase of a custom interpreter written from scratch in C.
 
-# What's Already There ?
-* Data Types (Number,String,Boolean,None)
-* Arithmetic Operations (+,-,*,/,^,%)
-* Boolean Operations (and,or,not)
-* Variables and Constants  (using const)
-* Comparators (==,!=,>,<,>=,<=)
-* IO operations using input() , print()
-* Type conversion using int()
-* Conditional Statements (if/elif/else)
-* While loops
-* Comments with #
-* Indentation-Based Syntax
-* Basic Error Messages
+# Why ? 
+This interpreter acts as a great educational tool for programming languages and runtime designers.
+It can also act as a language that is fast to setup, great for testing your programming ideas quickly since it
+has a neat and modern syntax. However it does have bugs and provides lesser features than modern production interpreters
+that limit the ability of the user to ideate and work quickly. Iam actively working on solving bugs,expanding features
+and to provide libraries.
 
-# What's New ?
-* Organised Project Structure (From single-c file in v0.1.0 to scripts,include,build and Makefile in v0.2.0)
-* Functions (Supports Parameters and Return , no Recursion .. yet)
-* Stronger Error Indication
-* New Built-in Functions str() and bool() for type conversion
+# How ?
+The project uses the classic interpreter architecture with a lexer and a recursive parser that produces an AST (abstract syntax tree).
+The AST is then recursively evaluated (tree walker) and executed. Memory is handled by a Pool that holds all allocations from LexerNodes,
+ASTnodes,String allocations,Variables,Functions etc. It automatically frees memory on program end ensuring no memory leak occurs. Variables and Functions
+are stored in a Hashmap (chains on collisions) for faster lookups during the evaluation of the AST. It also supports Indentation for readability and 
+uses a stack for tracking the indentation.
 
-# Installation Guide
-Download the files from the repo and use the Makefile to compile. After compilation , create a build folder with:
+# Setup
+-- Clone the Repo Using Git or Download Manually
+-- The repo consists of a Makefile which can be run using the command
 ```
-md build
+  make
 ```
-Check if the exe file exists with:
+-- An executable is now produced , which can be used to run ".app" files. Example - To run a file called "main.app" , run
 ```
-./interpret --version
+  ./interpret "main.app"
 ```
-To interpret and run a file in current directory,  run:
-```
-./interpret "filename.app"
-```
-# Guide On New Features
-* Function Declaration
-  ```
-  fn add(a,b):
-    return a+b
-  ```
-  
-  use the 'fn' keyword to create a function
-  
-* Function Call
-  ```
-  const ans = add(1,2) # use function name followed by arguments
-  ```
-  
-* str() and bool() type conversion
-  ```
-  const a = str(0) # '0'
-  const b = str(True) # 'True' 
-  const c = bool(100) # True
-  const d = bool(0) # False
-  ```
 
-# Future Plans
-* Write Recursion Logic
-* Provide Exception Handling
-* Write an Import system
-* Write a Standard Library
-* Write a Garbage Collector
+# Documentation
+This section provides the documentation for all the features supported by this interpreter version. It is advised to go through
+the documentation before programming since it has similar syntax to other languages like python that can make it confusing.
 
-# Author
--- Manoj K M  
--- Written With C and Curiosity
+## Comments
+```python
+# Comments Can be Made using a '#'
+```
+
+## IO statements
+### print()
+--- To print contents on the terminal , use the built-in print() function. The print() function takes any number of parameters and prints them 
+in the same line with spaces in between with the newline escape sequence.
+
+```python
+print("Hello World") # Hello World
+print(1 + 2) # 3
+print("Pi is",3.1428) # Pi is 3.1428
+```
+
+### input()
+
+
 
