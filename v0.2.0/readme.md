@@ -147,6 +147,6 @@ c = sum(0,10) # 10
 | RUN_TIME_ERROR | Occurs when there is a runtime error like passing a string to int() etc | check program logic, add checks using the line number given by the interpreter |
 | FUNCTION_ERROR | Occurs when there are function related errors like reusing function names, empty functions or wrong parameters | Use the line number to identify the exact error and debug |
 # Author
-Manoj K M
+Manoj K M   
 Written With C and Curiosity
 
