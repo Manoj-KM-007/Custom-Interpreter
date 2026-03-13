@@ -1,5 +1,6 @@
 # Custom Programming Language 
-It is simple Python-like interpreter written from scratch in C. It is the first version of the project and has only limited features including ones which python does'nt have.
+It is simple interpreter written from scratch in C. It is the first version of the project and has only limited features.
+
 # Features
 1) Interprets .py files and runs them
 2) Supports Integers,Strings,Booleans,Floats
@@ -12,7 +13,7 @@ It is simple Python-like interpreter written from scratch in C. It is the first 
 9) print() prints to the terminal with addition of newline character at the end
 10) both printc() and print() take argument of a single expression type (Integers,Floats,Boolean,Strings)
 11) import other .py files using import <filename> keyword , searches files in the same project directory
-12) Manual Garbage Collector to manage memory
+12) Memory Tracker to manage memory
 
 # Installation and Usage
 1) download interpret.exe from bin folder of this repository
