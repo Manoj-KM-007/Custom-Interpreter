@@ -134,6 +134,7 @@ c = sum(0,10) # 10
 ## Errors
 - The interpreter does not support error/exception handling features...yet but it does have a neat error system that provides error type,line at
    which the error happens ,hints and Even Error types. The following are the error types in the interpreter.
+  
 | Error Type | Why ? | What to do ? |
 |------------|-------|--------------|
 | SYNTAX_ERROR | Incorrect Syntax Usage | Refer Docs |
