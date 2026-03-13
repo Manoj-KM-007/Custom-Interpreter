@@ -136,6 +136,7 @@ c = sum(0,10) # 10
    which the error happens ,hints and Even Error types. The following are the error types in the interpreter.
 Error Type | Why ? | What to do ? |
 |:---:|:---:|:---:|
+
 SYNTAX_ERROR | Incorrect Syntax Usage | Refer Docs|
 DIVISION_BY_ZERO_ERROR | Division by zero | add checks / remove manual /0|
 COMPILE_TIME_ERROR | Possibly Memory Allocation Error | Rebuild the interpreter or Dm me the program|
