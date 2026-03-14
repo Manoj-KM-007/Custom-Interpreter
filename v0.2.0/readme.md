@@ -1,3 +1,27 @@
+# Custom Interpreter (Version : v0.2.)
+## Table of Contents
+- [What ?](#what-)
+- [Why ?](#why-)
+- [How ?](#how-)
+- [Setup](#setup)
+- [Documentation](#documentation)
+  - [Comments](#comments)
+  - [Data Types](#datatypes)
+  - [Variables And Constants](#variables-and-constants)
+  - [Arithmetic Operations](#arithmetic-operations)
+    - [String Operations](#string-operations)
+  - [Logical Operations](#logical-Operations)
+  - [Comparators](#comparators)
+  - [IO Statements](#io-statements)
+    - [print()](#print)
+    - [input()](#input)
+  - [Type Conversion Functions](#type-conversion-functions)
+  - [Conditional Statements](#conditional-statements)
+  - [While Loop](#while-loop)
+  - [Functions](#functions)
+  - [Errors](#errors)
+- [Final Thoughts](#final-thoughts)
+- [Author](#author)
 # What ?
 This repository holds the codebase of a custom interpreter written from scratch in C.
 
@@ -79,7 +103,7 @@ print("Interpreter" == "is not Fun") # False
 ```
 ## IO statements
 ### print()
--- To print contents on the terminal, use the built-in print() function. The print() function takes any number of parameters and prints them 
+- To print contents on the terminal, use the built-in print() function. The print() function takes any number of parameters and prints them 
 in the same line with spaces in between with the newline escape sequence.
 
 ```python
@@ -123,7 +147,7 @@ while i < 10:
   i = i + 1
 ```
 ## Functions
--- The latest Feature in this version are functions that can accept parameters and can return values. Recursion is not supported ...yet.
+- The latest Feature in this version are functions that can accept parameters and can return values. Recursion is not supported ...yet.
 ```python
 fn sum(a,b):
   return a+b
@@ -146,6 +170,17 @@ c = sum(0,10) # 10
 | INDENTATION_ERROR | Occurs when there are wrong or unnecessary indentations in blocks or main program | check indentations, specially inside blocks. Make sure all main program statements are not indented |
 | RUN_TIME_ERROR | Occurs when there is a runtime error like passing a string to int() etc | check program logic, add checks using the line number given by the interpreter |
 | FUNCTION_ERROR | Occurs when there are function related errors like reusing function names, empty functions or wrong parameters | Use the line number to identify the exact error and debug |
+
+# Future Plans
+- Adding call stacks and supporting recursion for functions
+- Building an import system and a standard library
+- Providing data structures such as lists and hashmaps
+- Possibly adding Garbage Collection (reference counting/mark and sweep GCs)
+- VM bytecode extension 
+
+# Final Thoughts
+This interpreter started as an educational project , to teach myself how interpreters work but over time , my goals have changed. The initial question was "How do interpreters work ?" and then it became "Can I write one ?" and currently it is "Can I make it powerful enough to write real world projects ?". My vision is to make this powerful enough to be the backbone of real world projects such as college assignments and projects,hackathon apps or even prototypes since I believe building an interpreter is just one task but using it is another. Contributions and Bug reporting are welcome.
+
 # Author
 Manoj K M   
 Written With C and Curiosity
