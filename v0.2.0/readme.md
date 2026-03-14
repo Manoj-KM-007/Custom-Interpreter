@@ -153,7 +153,7 @@ fn sum(a,b):
   return a+b
 ```
 - Function call can be made like:
-```
+```python
 print(sum(10,20)) # 30
 c = sum(0,10) # 10
 ```
