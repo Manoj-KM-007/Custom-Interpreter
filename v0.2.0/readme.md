@@ -1,4 +1,4 @@
-# Custom Interpreter (Version : v0.2.)
+# Custom Interpreter Version : v0.2.0
 ## Table of Contents
 - [What ?](#what-)
 - [Why ?](#why-)
