@@ -151,6 +151,9 @@ while i < 10:
 ```python
 fn sum(a,b):
   return a+b
+```
+- Function call can be made like:
+```
 print(sum(10,20)) # 30
 c = sum(0,10) # 10
 ```
