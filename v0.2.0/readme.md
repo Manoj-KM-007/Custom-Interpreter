@@ -125,7 +125,7 @@ b = str(True) # "True"
 c = bool(0) # False
 d = str(2) # "2"
 ```
--- feel free to experiment with different combinations and functions
+- feel free to experiment with different combinations and functions
 ## Conditional Statements
 - Supports if,elif,else,nested ifs.Every Statement under these must be indented appropriately.
 ```python
