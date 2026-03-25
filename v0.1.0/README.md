@@ -1,6 +1,6 @@
 # ⚙️ Interpreter V0.1.0
-  A lightweight Pythonic Interpreter written entirely in C.   
-  It executes .py files with many features such as variable and constant declarations,loops,condition statments,logics,comments and basic I/O.  
+  A lightweight Interpreter written entirely in C.   
+  It executes .py (could 'nt find the time to give a new name) files with many features such as variable and constant declarations,loops,condition statments,logics,comments and basic I/O.  
 # 🗂️ Project Structure 
   ➡️ src/interpreter.c   
   ➡️ bin/interpret.exe - main file,download and use in your project directory   
